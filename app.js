@@ -94,6 +94,10 @@ app.use((req, res, next)=>{ // Define middleware for flash
 //     res.send(registeredUser);
 // });
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
 // For listingsRouter
 app.use("/listings", listingRouter);
 // For reviewRouter
