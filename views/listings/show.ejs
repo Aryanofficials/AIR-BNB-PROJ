@@ -86,8 +86,8 @@
      <div class="row">
     <p><b>All reviews</b></p>
     <%for(review of listing.reviews){%>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 row-cols-1">
-    <div class="card col-5 ms-3 mb-3 review-card">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card ms-3 mb-3 review-card">
         <div class="card-body">
             <h5 class="card-title">@<%= review.author.username %></h5>
             <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
@@ -100,8 +100,9 @@
         </form>
         <%}%>
         </div>
+        </div>
     </div>
-    </div>
+    
     <%}%>
     <%}%>
 
