@@ -19,6 +19,7 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const port = process.env.PORT || 8080;
 
 // mongoos connection code
 // const MONGOOSE_URL = "mongodb://127.0.0.1:27017/wanderLust";
@@ -126,6 +127,6 @@ app.use((err, req, res, next) => {
 });
 
 // To start the server on port no 8080:
-app.listen(8080, (req,res)=>{
-    console.log("app is listening on port 8080");
+app.listen(port, (req,res)=>{
+    console.log("app is listening on port: ", port);
 });

@@ -4,7 +4,7 @@
         <div class="col col-md-6 offset-3 mt-3">
     </div>
 
-    <div class="card col-md-6 offset-2 listing-card">
+    <div class="card col-lg-6 col-md-8 col-sm-12 mx-auto listing-card">
         <h3> <%=listing.title%> </h3>
   <img src="<%=listing.image.url%>" 
   class="card-img-top show-image" 
@@ -24,14 +24,14 @@
 </div>
 
 <%if(currUser && currUser._id.equals(listing.owner._id)){%>
- <div class="btns">
+ <div class="btns d-flex flex-wrap gap-2"" >
     <a href="/listings/<%=listing._id%>/edit" 
-        class="btn btn-dark col-1 offset-2 edit-btn">
+        class="btn btn-dark edit-btn">
         Edit
     </a>
 
     <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button class="btn btn-dark offset-2 ">
+        <button class="btn btn-dark del-btn">
       Delete
     </button>
     </form>
@@ -39,7 +39,7 @@
     <%}%>
 
     
-    <div class="col-8 offset-2  mb-3">
+    <div class="col-8 offset-2 mb-3 ">
         <hr>
         <% if(currUser){ %>
     <h4>Leave a review</h4>
@@ -86,17 +86,21 @@
      <div class="row">
     <p><b>All reviews</b></p>
     <%for(review of listing.reviews){%>
-    <div class="card col-5 ms-3 mb-3">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 row-cols-1">
+    <div class="card col-5 ms-3 mb-3 review-card">
         <div class="card-body">
             <h5 class="card-title">@<%= review.author.username %></h5>
             <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
             <p class="card-text"> <%=review.comment%> </p>
+      <%  if(review.author.username == listing.owner.username){ %>
         <form 
         class="mb-3"  method="POST"
          action="/listings/<%=listing._id%>/reviews/<%=review.id%>?_method=DELETE">
             <button class="btn btn-dark btn-sm">Delete</button>
         </form>
+        <%}%>
         </div>
+    </div>
     </div>
     <%}%>
     <%}%>
