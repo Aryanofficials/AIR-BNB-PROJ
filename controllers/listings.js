@@ -1,6 +1,7 @@
 const Listing = require("../models/listing");
 
-module.exports.index =  async (req,res)=>{
+// Index route;
+module.exports.index =  async (req,res)=>{ // its work is to render all the listings
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", {allListings});
 };
@@ -30,10 +31,19 @@ module.exports.showListings =  async (req,res)=>{
 };
 
 module.exports.createListings = async (req,res)=>{
-let url = req.file.path; //here we extract url from req.file.path;
-let filename = req.file.filename; //here we extract url from req.file.filename;
+// let url = req.file.path; //here we extract url from req.file.path;
+// let filename = req.file.filename; //here we extract url from req.file.filename;
 //   let {title, description, price, location, country} = body.params; // We can also write an alternative of this which more compact to write in which we accessing the Listing obj which we created inside name field inside new.ejs;
+let url;
+let filename;
 
+if(req.file){
+    url = req.file.path;
+    filename = req.file.filename;
+} else {
+    url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNvUtoax4idRkGcNKJdgRUO2SyO8bBD6FcJo_WQ-ZqUiYhmzVr5b8ZFc&s=10";
+    filename = "default-image";
+}
 const location = req.body.listing.location;
 const response = await axios.get(
   `https://api.maptiler.com/geocoding/${location}.json?key=${process.env.MAP_TOKEN}`

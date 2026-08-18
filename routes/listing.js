@@ -14,8 +14,8 @@ router.route("/") //router.route() is used in Express to handle multiple HTTP me
 .get(wrapAsync(listingControllers.index))//  (Index route) => Get req to get all the data on page:
 .post( // Create new route
     isLoggedIn,
-    validateListing, // We add this method as a middle here;
     upload.single("listing[image]"),
+    validateListing, // We add this method as a middle here;
     wrapAsync(listingControllers.createListings));
 
     // New Routes;
