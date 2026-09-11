@@ -1,9 +1,30 @@
 const Listing = require("../models/listing");
 
 // Index route;
-module.exports.index =  async (req,res)=>{ // its work is to render all the listings
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", {allListings});
+// Index route
+module.exports.index = async (req, res) => {
+    let { search, category } = req.query;
+
+    let allListings;
+
+    if (category) {
+        allListings = await Listing.find({
+            category: category
+        });
+    } 
+    else if (search) {
+        allListings = await Listing.find({
+            location: {
+                $regex: search,
+                $options: "i"
+            }
+        });
+    } 
+    else {
+        allListings = await Listing.find({});
+    }
+
+    res.render("listings/index.ejs", { allListings });
 };
 
 module.exports.renderNewForm =  (req,res)=>{
@@ -84,7 +105,7 @@ module.exports.renderEditForm = async (req,res)=>{
 module.exports.updateListing = async(req, res)=>{
     let {id} = req.params;
    let listing = await Listing.findByIdAndUpdate(id,{...req.body.listing});
-// { new: true, runValidators: true }); // {...req.body.listing} here we deconstruct a oby cand convert it nto diff diff values.
+// { new: true, runValidators: true }); // {...req.body.listing} uses the spread operator to copy all properties of the listing object into a new object.
 
 if(typeof req.file !== "undefined"){ //typeof is use to check the value of any variable, is that variable is undefined or not.
 let url = req.file.path;

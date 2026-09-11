@@ -38,9 +38,9 @@ module.exports.isOwner = async(req, res, next) =>{
 
 // Handeling errors using JOI for listing:
 module.exports.validateListing = (req,res,next)=>{
-    let{error} = listingSchema.validate(req.body);
-    if(error){
-    let errMsg = error.details.map((el)=> el.message).join(",");
+    let{error} = listingSchema.validate(req.body);//We are validating our req body on listing schema. And whatever its result is came we extract error.
+    if(error){//If any error we gets then we throw a new express error
+    let errMsg = error.details.map((el)=> el.message).join(",");//Here we a extracting all the extra details of different err msgs which arr seperated by an (,.)
     throw new ExpressError(400, errMsg);
     }else{
         next();

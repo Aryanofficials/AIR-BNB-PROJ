@@ -115,10 +115,8 @@ app.use((req,res,next)=>{
 
 // Custome error handeller;
 app.use((err, req, res, next) => {
-   console.log(err);
 
    let { statusCode = 500, message = "Something went wrong" } = err;
-
    if (res.headersSent) {
       return next(err);
    }

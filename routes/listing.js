@@ -26,7 +26,7 @@ router.route("/:id")
 .put(// Update route:
     isLoggedIn,
     isOwner,
-    validateListing,
+    validateListing,//This validate listing is a Joi validation middleware for server side validation;
     upload.single("listing[image]"),
      wrapAsync(listingControllers.updateListing))
 .delete(isLoggedIn, // Delete route;

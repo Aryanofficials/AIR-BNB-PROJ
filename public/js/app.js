@@ -1,3 +1,4 @@
+// This the js logic of bootstrap validation given by bootstrap;
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   'use strict'
